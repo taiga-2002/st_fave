@@ -1,7 +1,5 @@
 import numpy as np
 from pyqubo import Array, Constraint, Placeholder
-import openjij as oj
-from dwave.system import DWaveSampler, EmbeddingComposite
 
 
 def create_qubo_matrix(input_data, similarity_matrix, matrices):
@@ -57,25 +55,13 @@ def create_qubo_matrix(input_data, similarity_matrix, matrices):
     return qubo, offset
 def optimize_qubo(qubo):
     """
-    SASamplerを使用してQUBO行列を最適化します。
-
-    Parameters:
-    qubo (dict): QUBO行列（辞書形式）
-
-    Returns:
-    best_solution (dict): 最適化された解
-    best_energy (float): 解のエネルギー
+    Optimize the QUBO using a classical optimizer (e.g., simulated annealing).
     """
-    #token = '***'  # 個人のAPI tokenを使用
+    from neal import SimulatedAnnealingSampler
 
-    # OpenJijのSASamplerを使用して最適化
-    sampler = oj.SASampler()
-    response = sampler.sample_qubo(qubo, num_reads=100)  # num_readsは必要に応じて調整
-    # dw_sampler = DWaveSampler(solver='Advantage_system6.4', token=token)
-    # sampler = EmbeddingComposite(dw_sampler)
-    # response=sampler.sample_qubo(qubo, num_reads=100)
+    sampler = SimulatedAnnealingSampler()
+    response = sampler.sample_qubo(qubo, num_reads=100)
 
-    # 最適解とそのエネルギーを取得
     best_solution = response.first.sample
     best_energy = response.first.energy
 
