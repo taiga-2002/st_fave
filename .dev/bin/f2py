@@ -1,4 +1,4 @@
-#!/Users/toedataiga/dev/st_fave/.dev/bin/python3
+#!/Users/toedataiga/dev/st_fave/.dev/bin/python3.10
 # -*- coding: utf-8 -*-
 import re
 import sys
